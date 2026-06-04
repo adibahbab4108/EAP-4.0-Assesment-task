@@ -1,0 +1,135 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  PROJECT_MANAGER
+  TEAM_MEMBER
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
+  ON_HOLD
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum TaskPriority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model User {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String        @unique
+  password     String
+  name         String
+  role         Role          @default(TEAM_MEMBER)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  
+  // Relations
+  projectIds   String[]      @db.ObjectId
+  projects     Project[]     @relation(fields: [projectIds], references: [id])
+  
+  assignedTasks Task[]       @relation("AssignedTasks")
+  comments     Comment[]
+  activityLogs ActivityLog[]
+  notifications Notification[]
+}
+
+model Project {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  status      ProjectStatus @default(ACTIVE)
+  deadline    DateTime
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  memberIds   String[]      @db.ObjectId
+  members     User[]        @relation(fields: [memberIds], references: [id])
+  
+  tasks       Task[]
+}
+
+model Task {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  status       TaskStatus   @default(TODO)
+  priority     TaskPriority @default(MEDIUM)
+  dueDate      DateTime
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  // Relations
+  projectId    String       @db.ObjectId
+  project      Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  assignedToId String?      @db.ObjectId
+  assignedTo   User?        @relation("AssignedTasks", fields: [assignedToId], references: [id])
+  
+  comments     Comment[]
+  attachments  Attachment[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  createdAt DateTime @default(now())
+  
+  // Relations
+  taskId    String   @db.ObjectId
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Attachment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  fileName  String
+  fileUrl   String
+  fileType  String
+  createdAt DateTime @default(now())
+
+  // Relations
+  taskId    String   @db.ObjectId
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+}
+
+model ActivityLog {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  action    String
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId    String?  @db.ObjectId
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
