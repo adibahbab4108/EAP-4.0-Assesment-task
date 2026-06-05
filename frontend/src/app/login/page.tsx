@@ -57,20 +57,20 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background neon glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-violet-600/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-cyan-600/10 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-violet-600/20 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-80 h-80 rounded-full bg-cyan-600/30 blur-[120px] pointer-events-none" />
 
       <div className="w-full max-w-md space-y-8 z-10">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400">
-            CollabSphere
+            HeroCollab
           </h1>
           <p className="mt-2 text-sm text-slate-400">
             Smart Project & Task Collaboration System
           </p>
         </div>
 
-        <Card className="border-slate-800 bg-slate-900/50 backdrop-blur-xl text-slate-100 shadow-2xl">
+        <Card className=" border-slate-800 bg-slate-900/50 backdrop-blur-xl text-slate-100 shadow-2xl">
           <CardHeader>
             <CardTitle className="text-2xl font-bold flex items-center gap-2">
               <LogIn className="w-5 h-5 text-indigo-400" /> Sign In

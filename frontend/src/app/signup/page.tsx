@@ -49,7 +49,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md space-y-8 z-10">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-indigo-400 to-cyan-400">
-            CollabSphere
+            HeroCollab
           </h1>
           <p className="mt-2 text-sm text-slate-400">
             Smart Project & Task Collaboration System

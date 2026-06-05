@@ -40,7 +40,7 @@ async function main() {
     data: {
       email: 'member@example.com',
       password: passwordHash,
-      name: 'Charlie Member',
+      name: 'Adib Member',
       role: Role.TEAM_MEMBER,
     },
   });

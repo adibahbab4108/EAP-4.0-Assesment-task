@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CollabSphere | Smart Project & Task Collaboration System",
+  title: "HeroCollab | Smart Project & Task Collaboration System",
   description: "Manage projects, assign tasks, and track team workloads seamlessly.",
 };
 

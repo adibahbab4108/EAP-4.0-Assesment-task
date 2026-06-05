@@ -15,8 +15,6 @@ import {
   LogOut, 
   Menu, 
   X, 
-  Sun, 
-  Moon, 
   UserCircle 
 } from 'lucide-react';
 
@@ -25,7 +23,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [unreadNotifications, setUnreadNotifications] = useState(0);
-  const [isDark, setIsDark] = useState(true);
 
   // Fetch notifications to show count
   const fetchNotificationCount = async () => {
@@ -47,18 +44,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const interval = setInterval(fetchNotificationCount, 30000);
     return () => clearInterval(interval);
   }, [user]);
-
-  // Toggle Dark Mode
-  const toggleTheme = () => {
-    const html = document.documentElement;
-    if (isDark) {
-      html.classList.remove('dark');
-      setIsDark(false);
-    } else {
-      html.classList.add('dark');
-      setIsDark(true);
-    }
-  };
 
   if (loading) {
     return (
@@ -98,10 +83,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className="hidden md:flex flex-col w-64 bg-slate-900 border-r border-slate-800 p-6 shrink-0 z-20">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
-            C
+            H
           </div>
           <span className="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
-            CollabSphere
+            HeroCollab
           </span>
         </div>
 
@@ -135,14 +120,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Profile Card & Actions */}
         <div className="border-t border-slate-800 pt-6 mt-6 space-y-4">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-100 transition duration-200"
-              title="Toggle theme"
-            >
-              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </button>
+          <div className="flex items-center justify-end">
             <button
               onClick={logout}
               className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-950/20 text-sm font-medium transition duration-200"
@@ -170,15 +148,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-cyan-500 flex items-center justify-center font-bold text-white">
             C
           </div>
-          <span className="text-xl font-extrabold text-white">CollabSphere</span>
+          <span className="text-xl font-extrabold text-white">HeroCollab</span>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-slate-800 text-slate-400"
-          >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 rounded-lg bg-slate-800 text-slate-400"
