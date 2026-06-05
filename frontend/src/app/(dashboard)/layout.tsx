@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import { Button } from '@/components/ui/button';
 import { api } from '@/lib/api';
 import { 
   LayoutDashboard, 
@@ -17,6 +16,7 @@ import {
   X, 
   UserCircle 
 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading, logout } = useAuth();
@@ -120,10 +120,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Profile Card & Actions */}
         <div className="border-t border-slate-800 pt-6 mt-6 space-y-4">
-          <div className="flex items-center justify-end">
+          <div className="flex items-center">
             <button
               onClick={logout}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-950/20 text-sm font-medium transition duration-200"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-950/20 text-sm font-medium transition duration-200 cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
               <span>Logout</span>
@@ -131,7 +131,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/40 border border-slate-800/60">
-            <UserCircle className="w-10 h-10 text-slate-400 shrink-0" />
+            <div className="relative w-10 h-10 shrink-0 rounded-full overflow-hidden border border-slate-700">
+              <Image 
+                src="/profile.png" 
+                alt="User Profile" 
+                fill 
+                className="object-cover"
+              />
+            </div>
             <div className="overflow-hidden">
               <p className="text-sm font-semibold text-slate-200 truncate">{user.name}</p>
               <span className={`inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-semibold border ${getRoleColor(user.role)}`}>
@@ -153,7 +160,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-slate-800 text-slate-400"
+            className="p-2 rounded-lg bg-slate-800 text-slate-400 cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -205,7 +212,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 setMobileMenuOpen(false);
                 logout();
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-950/20 text-sm font-semibold transition"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-950/20 text-sm font-semibold transition cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
               <span>Logout</span>

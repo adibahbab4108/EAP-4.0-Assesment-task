@@ -146,7 +146,7 @@ After seeding the database, you can log in using any of the following pre-config
 | Name | Email | Role | Access Level |
 | :--- | :--- | :--- | :--- |
 | **Alice Admin** | `admin@example.com` | `ADMIN` | Full control over projects, tasks, and users. |
-| **Bob PM** | `pm@example.com` | `PROJECT_MANAGER` | Create & update projects, create tasks. |
+| **Mr Adib PM** | `pm@example.com` | `PROJECT_MANAGER` | Create & update projects, create tasks. |
 | **Adib Member** | `member@example.com` | `TEAM_MEMBER` | View projects, update assigned tasks, comment, upload files. |
 | **David Member** | `member2@example.com` | `TEAM_MEMBER` | View projects, update assigned tasks, comment, upload files. |
 

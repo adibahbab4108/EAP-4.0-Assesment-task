@@ -31,7 +31,7 @@ async function main() {
     data: {
       email: 'pm@example.com',
       password: passwordHash,
-      name: 'Bob PM',
+      name: 'Mr Adib PM',
       role: Role.PROJECT_MANAGER,
     },
   });
