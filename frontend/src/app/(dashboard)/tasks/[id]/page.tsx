@@ -29,7 +29,7 @@ import {
   Download
 } from 'lucide-react';
 
-const BACKEND_HOST = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5000';
+const BACKEND_HOST = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:5001';
 
 export default function TaskDetailPage() {
   const { user } = useAuth();
