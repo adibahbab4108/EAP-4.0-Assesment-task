@@ -38,6 +38,10 @@ app.use('/api/users', userRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/logs', logRoutes);
 
+app.get('/', (_req, res) => {
+  res.send('API is running...');
+});
+
 // Global Error Handler
 app.use(errorHandler);
 
