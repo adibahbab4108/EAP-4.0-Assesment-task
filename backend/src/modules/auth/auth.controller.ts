@@ -16,11 +16,12 @@ export class AuthController {
     try {
       const { token, user } = await AuthService.login(req.body);
       
+      const isProd = process.env.NODE_ENV === 'production';
       // Set token as HttpOnly cookie
       res.cookie('token', token, {
         httpOnly: true,
-        secure: false, // Allows cookie to be sent over HTTP for local testing
-        sameSite: 'lax',
+        secure: isProd, // Requires https in production
+        sameSite: isProd ? 'none' : 'lax', // 'none' required for cross-site cookies
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
       

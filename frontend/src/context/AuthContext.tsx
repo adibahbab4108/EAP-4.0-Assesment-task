@@ -34,9 +34,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (response.success && response.data) {
         setUser(response.data);
       } else {
+        localStorage.removeItem('token');
         setUser(null);
       }
     } catch (error) {
+      localStorage.removeItem('token');
       setUser(null);
     } finally {
       setLoading(false);
@@ -66,6 +68,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const res = await api.post('/auth/login', { email, password });
       if (res.success && res.data) {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+        }
         setUser(res.data);
         router.replace('/dashboard');
       }
@@ -91,6 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = async () => {
     try {
       await api.post('/auth/logout');
+      localStorage.removeItem('token');
       setUser(null);
       router.replace('/login');
     } catch (error) {
